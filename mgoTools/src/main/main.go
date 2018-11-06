@@ -11,7 +11,7 @@ import (
 func main() {
 	fmt.Println("some")
 
-	col := "go_test"
+	col := "go_test2"
 	mgoT := new(MgoT.MgoTools)
 	mgoUrl := "mongodb://wc_applet_rw:%s@s-2ze6c71dc69d0fc4.mongodb.rds.aliyuncs.com:3717,s-2zed48c86d79ee04.mongodb.rds.aliyuncs.com:3717/wc_applet"
 	mgoPass := "DUw@87weh43gy#%WC"
@@ -36,28 +36,28 @@ func main() {
 		fmt.Println("Use mongodb occur err ", mgoT.MgoErr)
 	} else {
 		fmt.Println("The collection ", col, "not exist!")
-		ok = mgoT.CreateCol(col)
-
-		if !ok {
-			fmt.Println("The collection ", col, "create fail!")
-			panic("emm~ exit!")
-		}
+		//ok = mgoT.CreateCol(col)
+		//
+		//if !ok {
+		//	fmt.Println("The collection ", col, "create fail!")
+		//	panic("emm~ exit!")
+		//}
 	}
 
 	// 创建索引
-	ok = mgoT.CreateIndexNormal(col, "start", true, true, false)
-	if ok {
-		fmt.Println("集合 go_test 创建普通索引 start 成功！")
-	}
-
-	ok = mgoT.CreateIndexHashed(col, "end", false)
-	if ok {
-		fmt.Println("集合 go_test 创建哈希索引 end 成功！")
-	}
-
-	var ret map[string]interface{}
-	ok = mgoT.ShardingCol("wc_applet", col, "end", true, &ret)
-	fmt.Println( "Sharding collection ret is ", ok, ret )
+	//ok = mgoT.CreateIndexNormal(col, "start", true, true, false)
+	//if ok {
+	//	fmt.Println("集合 go_test 创建普通索引 start 成功！")
+	//}
+	//
+	//ok = mgoT.CreateIndexHashed(col, "end", false)
+	//if ok {
+	//	fmt.Println("集合 go_test 创建哈希索引 end 成功！")
+	//}
+	//
+	//var ret map[string]interface{}
+	//ok = mgoT.ShardingCol("wc_applet", col, "end", true, &ret)
+	//fmt.Println( "Sharding collection ret is ", ok, ret )
 
 	//insertValues := bson.M{
 	//	"start": "biu~biu~biu~",
@@ -130,21 +130,21 @@ func main() {
 	fmt.Println( deviceInfoOne, ok, mgoT.MgoErr )
 
 	// update
-	updateConditions := bson.M{
-		"$set": bson.M{
-			"start": "biu~biu~biu~2",
-		},
-	}
-	ok = mgoT.UpdateOne(col, query, updateConditions)
-	if ok {
-		fmt.Println("Update success", mgoT.MgoUpdateInfo)
-	}
+	//updateConditions := bson.M{
+	//	"$set": bson.M{
+	//		"start": "biu~biu~biu~2",
+	//	},
+	//}
+	//ok = mgoT.UpdateOne(col, query, updateConditions)
+	//if ok {
+	//	fmt.Println("Update success", mgoT.MgoUpdateInfo)
+	//}
 
 	// delete
-	ok = mgoT.DeleteOne(col ,query)
-	if ok {
-		fmt.Println("Delete one success!")
-	}
+	//ok = mgoT.DeleteOne(col ,query)
+	//if ok {
+	//	fmt.Println("Delete one success!")
+	//}
 }
 
 
