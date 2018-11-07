@@ -8,6 +8,7 @@ import (
 
 var TestData = ``
 
+// **********************************************  test ***************************************************
 func JsonIterGetOneFromByte() {
 	val := []byte(`{"ID":1,"Name":"Reds","Colors":["Crimson","Red","Ruby","Maroon"]}`)
 	ret := jsoniter.Get(val, "Colors", 0).ToString()
@@ -29,29 +30,25 @@ func JsonIterMashal() {
 }
 
 
-func JsonIterGet() {
-	val := []byte(TestData)
-	ret := jsoniter.Get(val, "msg", "custom").ToString()
-	fmt.Println("JsonIterGetOneFromByte get msg.custom ret is", ret)
-
-	ret = jsoniter.Get(val, "msg").ToString()
-	fmt.Println("JsonIterGetOneFromByte get msg ret is", ret)
+func JsonIterGet(jsonString string, key_path ...interface{}) (jsoniter.Any) {
+	val := []byte(jsonString)
+	ret := jsoniter.Get(val, key_path ...)
+	return ret
 }
 
 
-func JsonIterLoad(jsonString string) (error, func(key_path ...interface{}) (jsoniter.Any)) {
+// **********************************************  usefull ***************************************************
+func JsonIterLoad(jsonString string) (func(key_path ...interface{}) (jsoniter.Any) , error) {
 	var jsonRet map[string]interface{}
 	var json = jsoniter.ConfigCompatibleWithStandardLibrary
-	err := json.Unmarshal([]byte(TestData), &jsonRet)
+	err := json.Unmarshal([]byte(jsonString), &jsonRet)
 	if nil != err {
-		return err, nil
+		return nil, err
 	}
 
 	varByte := []byte(jsonString)
-	return nil, func(key_path ...interface{}) (jsoniter.Any) {
-
-		fmt.Println("emm", key_path)
+	return func(key_path ...interface{}) (jsoniter.Any) {
 		return jsoniter.Get(varByte, key_path ...)
-	}
+	}, nil
 
 }
