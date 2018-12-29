@@ -5,7 +5,7 @@ import (
 )
 
 
-func JsonLoads(src string, dst *interface{}) (error) {
+func JsonLoads(src string, dst interface{}) (error) {
 	err := json.Unmarshal([]byte(src), dst)
 	return err
 }

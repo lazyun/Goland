@@ -54,10 +54,12 @@ rowChangeStmt, err := ChangeStmtRet.RowsAffected()
 
 ## 查询（支持多条数据）
 
+使用此接口要关闭，否则导致连接丢失，造成 Mysql 大量连接
+
 ```
 queryRet := sqlT.Query("select id, name from goTest limit ?", 3)
 for {
-		ok, queryRetValue := queryRet()
+		ok, queryRetValue := queryRet(false)
 		if !ok {
 			if nil == sqlT.SqlErr {
 				fmt.Printf("Get query result all!\n")

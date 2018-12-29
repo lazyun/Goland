@@ -10,21 +10,22 @@ import (
 
 type SqlTools struct {
 	// 配置信息
-	Host	string
-	User	string
-	Passwd	string
-	Db		string
-	Port	int
-	UrlStr	string
+	Host		string
+	User		string
+	Passwd		string
+	Db			string
+	Port		int
+	UrlStr		string
 
 	// mysql 连接池
-	Pool	*sql.DB
+	Pool		*sql.DB
 
 	// err 信息
-	SqlErr	error
+	SqlErr		error
+	logHandle	func (interface{})
 
 	// sql Stmt 模版
-	StmtMap	map[string]*sql.Stmt
+	StmtMap		map[string]*sql.Stmt
 }
 
 // Set Mysql config and connect Mysql
@@ -69,11 +70,33 @@ func (this *SqlTools) Close() {
 }
 
 
+func (this *SqlTools) SetLogHandle(funcName func (msg interface{})) {
+	this.logHandle = funcName
+}
+
+
+func (this *SqlTools) SetErrLog(msg string, value ...interface{}) {
+	if nil == this.logHandle {
+		fmt.Println("log handle is nil")
+		fmt.Printf(msg, value ...)
+		return
+	}
+
+	ret := fmt.Sprintf(msg, value ...)
+	this.logHandle(ret)
+}
+
+
+func (this *SqlTools) SetMaxConn(num int) {
+	this.Pool.SetMaxOpenConns(num)
+}
+
 // Set Mysql sql template, parameter use ? replace
 // Return true or false. SqlTools.SqlErr is fail to set
 func (this *SqlTools) SetSqlStatement(key, value string) bool {
 	temp, err := this.Pool.Prepare(value)
 	if nil != err {
+		this.SetErrLog("Set sql statement [%s] [%s]fail []\n", key, value, err)
 		this.SqlErr = err
 		return false
 	}
@@ -89,7 +112,7 @@ func (this *SqlTools) SetSqlStatement(key, value string) bool {
 func (this *SqlTools) QueryOneStmt(key string, value ...interface{}) (bool, sql.Row) {
 	stmt, ok := this.StmtMap[key]
 	if !ok {
-		fmt.Printf("not found %s sql statement!\n", key)
+		this.SetErrLog("Find sql statement [%s] fail\n", key)
 		return false, sql.Row{}
 	}
 
@@ -108,7 +131,7 @@ func (this *SqlTools) QueryOneStmt(key string, value ...interface{}) (bool, sql.
 func (this *SqlTools) ChangeStmt(key string, value ...interface{}) (bool, sql.Result) {
 	stmt, ok := this.StmtMap[key]
 	if !ok {
-		fmt.Printf("not found %s sql statement!\n", key)
+		this.SetErrLog("Find sql statement [%s] fail\n", key)
 		return false, *new(sql.Result)
 	}
 
@@ -130,11 +153,11 @@ func (this *SqlTools) ChangeStmt(key string, value ...interface{}) (bool, sql.Re
 }
 
 
-func (this *SqlTools) Query(sqlCmd string, args ...interface{}) ( func() (bool, []sql.RawBytes) ) {
+func (this *SqlTools) Query(sqlCmd string, args ...interface{}) ( func(isClose bool) (bool, []sql.RawBytes) ) {
 	rows, err := this.Pool.Query(sqlCmd, args...)
 	if nil != err {
 		this.SqlErr = err
-		fmt.Printf("sql query fail! %s \n", err.Error())
+		this.SetErrLog("Sql [%s] [%s]query fail [%s]\n", sqlCmd, args, err)
 		return nil
 	}
 
@@ -142,13 +165,17 @@ func (this *SqlTools) Query(sqlCmd string, args ...interface{}) ( func() (bool, 
 	columns, err := rows.Columns()
 	if err != nil {
 		this.SqlErr = err
-		fmt.Printf("sql query get columns fail! %s \n", err.Error())
+		this.SetErrLog("Sql [%s] [%s]query fail [%s]\n", sqlCmd, args, err)
 		return nil
 	}
 
 	//fmt.Println("query field is ", columns)
 
-	return func () (bool, []sql.RawBytes) {
+	return func (isClose bool) (bool, []sql.RawBytes) {
+		if isClose {
+			rows.Close()
+		}
+
 		values := make([]sql.RawBytes, len(columns))
 		scanArgs := make([]interface{}, len(columns))
 		for i := range values {
@@ -157,14 +184,16 @@ func (this *SqlTools) Query(sqlCmd string, args ...interface{}) ( func() (bool, 
 
 		ok := rows.Next()
 		if !ok {
+			rows.Close()
 			this.SqlErr = nil
 			return ok, nil
 		}
 
 		err := rows.Scan(scanArgs...)
 		if nil != err {
+			rows.Close()
 			this.SqlErr = err
-			fmt.Printf("sql query fail! %s \n", err.Error())
+			this.SetErrLog("Sql [%s] [%s]query fail [%s]\n", sqlCmd, args, err)
 			return false, nil
 		}
 
@@ -182,7 +211,7 @@ func (this *SqlTools) ExecCmd(sql string, values ...interface{}) (sql.Result) {
 
 	if nil != err {
 		this.SqlErr = err
-		fmt.Printf("sql connect fail!\n", err)
+		this.SetErrLog("Sql ping fail [%s]\n", err)
 		ok = this.Connect()
 	}
 

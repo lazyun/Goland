@@ -4,6 +4,8 @@ import (
 	SqlT "../mysqlTools"
 	"fmt"
 	"os"
+	"bufio"
+	//"github.com/derekparker/delve/pkg/dwarf/reader"
 )
 
 
@@ -74,10 +76,43 @@ func main() {
 		fmt.Printf("Query fail error %s !\n", sqlT.SqlErr.Error())
 		os.Exit(1)
 	}
+	//queryRet(true)
+	//
+	//queryRet = sqlT.Query("select id, name from goTest limit ?", 3)
+	//queryRet(true)
+	//
+	//queryRet = sqlT.Query("select id, name from goTest limit ?", 3)
+	//queryRet(true)
+	//
+	//queryRet = sqlT.Query("select id, name from goTest limit ?", 3)
+	//queryRet(true)
+	//
+	//queryRet = sqlT.Query("select id, name from goTest limit ?", 3)
+	//queryRet(true)
+	//
+	//queryRet = sqlT.Query("select id, name from goTest limit ?", 3)
+	//fmt.Println(queryRet)
+	//reader := bufio.NewReader(os.Stdin)
+	//cc, _, err := reader.ReadRune()
+	//fmt.Println(cc)
+	//os.Exit(1)
 
+	// 设置最大连接数目 通过 show processlist 查看数据库状态
+	//sqlT.SetMaxConn(2)
+	//fmt.Println(1)
+	//queryRet = sqlT.Query("select id, name from goTest limit ?", 3)
+	//fmt.Println(2)
+	//queryRet = sqlT.Query("select id, name from goTest limit ?", 3)
+	//fmt.Println(3)
+	//queryRet = sqlT.Query("select id, name from goTest limit ?", 3)
+	//fmt.Println(4)
+	//reader := bufio.NewReader(os.Stdin)
+	//cc, _, err := reader.ReadRune()
+	//fmt.Println(cc)
+	//os.Exit(1)
 
 	for {
-		ok, queryRetValue := queryRet()
+		ok, queryRetValue := queryRet(false)
 		if !ok {
 			if nil == sqlT.SqlErr {
 				fmt.Printf("Get query result all!\n")
