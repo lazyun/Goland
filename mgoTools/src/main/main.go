@@ -11,11 +11,11 @@ import (
 func main() {
 	fmt.Println("some")
 
-	col := "go_test2"
+	col := "test"
 	mgoT := new(MgoT.MgoTools)
-	mgoUrl := "mongodb://wc_applet_rw:%s@s-2ze6c71dc69d0fc4.mongodb.rds.aliyuncs.com:3717,s-2zed48c86d79ee04.mongodb.rds.aliyuncs.com:3717/wc_applet"
-	mgoPass := "DUw@87weh43gy#%WC"
-	mgoDB := "wc_applet"
+	mgoUrl := "mongodb://lizy:%s@127.0.0.1:27017/admin"
+	mgoPass := "lizy123"
+	mgoDB := "test"
 	ok := mgoT.SetConfig(mgoUrl, mgoPass, mgoDB)
 	if !ok {
 		fmt.Println(mgoT.MgoUrlStr)
@@ -145,6 +145,32 @@ func main() {
 	//if ok {
 	//	fmt.Println("Delete one success!")
 	//}
+
+
+
+	queryConditions := bson.M{
+		"_id": bson.ObjectIdHex("5abb5f4eeea0a43270543327"),
+	}
+
+	updateConditions := bson.M{
+		"$set": bson.M{
+			"mac": "lizy,lalala",
+		},
+	}
+
+	projections := bson.M{
+		"mac": 1,
+		"jklasn": 1,
+		"fields_type": 1,
+		"_id": 0,
+	}
+
+	ret := make(map[string]interface{})
+	if !mgoT.FindAndModify("test", queryConditions, updateConditions, ret, true, false, projections) {
+		fmt.Println("Find and modify fail error is", mgoT.MgoErr)
+	}
+
+	fmt.Println("Find and modify success ret is", mgoT.MgoUpdateInfo, ret)
 }
 
 
