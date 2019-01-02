@@ -1,4 +1,4 @@
-package goTools
+package jsonTools
 
 import (
 	"encoding/json"
