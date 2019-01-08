@@ -18,6 +18,7 @@ import (
 	"runtime"
 	"errors"
 	"time"
+	"io/ioutil"
 )
 
 var WriteFileBuffer = 4096
@@ -49,12 +50,12 @@ func FileExist(filePath, fileName string, createDir bool) (bool, error) {
 	_, err := os.Stat(filePath)
 	if nil != err {
 		if !createDir {
-			fmt.Printf("No this directory %s, %s\n", filePath, err.Error())
+			//fmt.Printf("No this directory %s, %s\n", filePath, err.Error())
 			return false, err
 		}
 
 		if err = os.MkdirAll(filePath, 0755); nil != err {
-			fmt.Printf("Create this directory %s fail, %s\n", filePath, err.Error())
+			//fmt.Printf("Create this directory %s fail, %s\n", filePath, err.Error())
 			return false, err
 		}
 	}
@@ -73,11 +74,11 @@ func ReadFile(filePath, fileName string, trimSuffix bool) (bool, error, func (cl
 		return false, err, nil
 	}
 
-	abslolutePathFile := path.Join(filePath, fileName)
+	absolutePathFile := path.Join(filePath, fileName)
 
-	f, err := os.Open(abslolutePathFile);
+	f, err := os.Open(absolutePathFile);
 	if  nil != err {
-		fmt.Printf("Open file %s fail, %s\n", abslolutePathFile, err.Error() )
+		//fmt.Printf("Open file %s fail, %s\n", abslolutePathFile, err.Error() )
 		return false, err, nil
 	}
 
@@ -108,7 +109,7 @@ func ReadFile(filePath, fileName string, trimSuffix bool) (bool, error, func (cl
 		//}
 
 		if nil != err {
-			fmt.Printf("Read file %s fail %s\n", abslolutePathFile, err.Error() )
+			//fmt.Printf("Read file %s fail %s\n", abslolutePathFile, err.Error() )
 			return false, err, line
 		}
 
@@ -118,6 +119,12 @@ func ReadFile(filePath, fileName string, trimSuffix bool) (bool, error, func (cl
 
 		return true, nil, line
 	}
+}
+
+
+func ReadFileAll(filePath, fileName string) ([]byte, error) {
+	absolutePathFile := path.Join(filePath, fileName)
+	return ioutil.ReadFile(absolutePathFile)
 }
 
 
@@ -277,7 +284,7 @@ func GoChanTest() {
 		for {
 			select {
 			case key := <-keyChan:
-				fmt.Println("recv key ", key)
+				//fmt.Println("recv key ", key)
 				value, ok := testMap[key]
 				if ok {
 					valueChan <- value
@@ -383,7 +390,7 @@ func TimeFileAppend(basePath, filePrefix, fileSuffix string, fileSplit byte, flu
 
 			var writeHandle *bufio.Writer
 			f, err := os.OpenFile(absFileName,  os.O_WRONLY|os.O_CREATE|os.O_APPEND, 0644)
-			fmt.Println("Open file ", absFileName, err)
+			//fmt.Println("Open file ", absFileName, err)
 			if nil != err {
 
 				createFileErr = err
@@ -423,11 +430,11 @@ func TimeFileAppend(basePath, filePrefix, fileSuffix string, fileSplit byte, flu
 			nowTimeStr := time.Now().Format(timeFmt)
 
 			if flushFirst {
-				fmt.Println("flush sleep time is ", flushSleepTime)
+				//fmt.Println("flush sleep time is ", flushSleepTime)
 				time.Sleep( time.Second * time.Duration(flushSleepTime) )
 				flushFirst = false
 			} else {
-				fmt.Println("flush sleep time is ", flushRate)
+				//fmt.Println("flush sleep time is ", flushRate)
 				time.Sleep( time.Second * time.Duration(flushRate) )
 			}
 
@@ -451,7 +458,7 @@ func TimeFileAppend(basePath, filePrefix, fileSuffix string, fileSplit byte, flu
 			//ret := nextHour.Sub( now )
 
 			closeSleepTime := sleepTime + closeDelay - nowSecond
-			fmt.Println("close sleep time is ", closeSleepTime)
+			//fmt.Println("close sleep time is ", closeSleepTime)
 			time.Sleep( time.Second * time.Duration(closeSleepTime) )
 
 			fileHandle, ok := fileHandleMap[nowTimeStr]
@@ -476,7 +483,7 @@ func TimeFileAppend(basePath, filePrefix, fileSuffix string, fileSplit byte, flu
 
 	return nil, func(content string, close bool) error {
 		if close {
-			fmt.Println("Defer enter there")
+			//fmt.Println("Defer enter there")
 			for _, value := range fileIoHandleMap {
 				value.Flush()
 			}
@@ -486,7 +493,7 @@ func TimeFileAppend(basePath, filePrefix, fileSuffix string, fileSplit byte, flu
 			}
 		}
 
-		fmt.Println("write log file time", nowTimeStr)
+		//fmt.Println("write log file time", nowTimeStr)
 		ioHandle, ok := fileIoHandleMap[nowTimeStr]
 		if !ok {
 			return createFileErr

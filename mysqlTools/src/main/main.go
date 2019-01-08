@@ -27,7 +27,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	ok, QueryOneStmtRet := sqlT.QueryOneStmt("findId", 1531800702)
+	QueryOneStmtRet, ok := sqlT.QueryOneStmt("findId", 1531800702)
 	if !ok {
 		fmt.Printf("Query mysql template findId fail error is %s !\n", sqlT.SqlErr.Error())
 		os.Exit(1)
@@ -50,7 +50,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	ok, ChangeStmtRet := sqlT.ChangeStmt("insertGoTest", "la~la~la~", 1531800702)
+	ChangeStmtRet, ok := sqlT.ChangeStmt("insertGoTest", "la~la~la~", 1531800702)
 	if !ok {
 		fmt.Printf("Change mysql template insertGoTest fail error is %s !\n", sqlT.SqlErr.Error())
 		os.Exit(1)
@@ -112,7 +112,7 @@ func main() {
 	//os.Exit(1)
 
 	for {
-		ok, queryRetValue := queryRet(false)
+		queryRetValue, ok := queryRet(false)
 		if !ok {
 			if nil == sqlT.SqlErr {
 				fmt.Printf("Get query result all!\n")
