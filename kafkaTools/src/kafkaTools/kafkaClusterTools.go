@@ -13,7 +13,14 @@ import (
 	"sync"
 )
 
+type KafkaConfig struct {
+	Hosts     	[]string   	`json:"hosts"`
+	Topic     	[]string   	`json:"topic"`
+	Consumer  	string   	`json:"consumer"`
+	TopicSend 	[]string 	`json:"topic_send"`
 
+	StartNumb	int			`json:"start_number"`
+}
 
 type KafkaClusterTools struct {
 	Broker 			[]string
@@ -29,7 +36,7 @@ type KafkaClusterTools struct {
 }
 
 
-func (this *KafkaClusterTools) SetConfigNormal(hosts, topic []string, group string, IsUsePartitions bool) {
+func (this *KafkaClusterTools) SetConfigNormal(cfg KafkaConfig, IsUsePartitions bool) {
 	config := cluster.NewConfig()
 
 	if IsUsePartitions {
@@ -43,9 +50,9 @@ func (this *KafkaClusterTools) SetConfigNormal(hosts, topic []string, group stri
 	//config.Version = kafkaVer
 
 	this.kafkaConfig = config
-	this.Broker = hosts
-	this.Topic = topic
-	this.Group = group
+	this.Broker = cfg.Hosts
+	this.Topic = cfg.Topic
+	this.Group = cfg.Consumer
 
 	this.Connect()
 }
@@ -151,7 +158,7 @@ func (this *KafkaClusterTools) GoRunAll(start func() (func (*sarama.ConsumerMess
 	for {
 		select {
 		case part, ok := <-this.kafkaConsumer.Partitions():
-			fmt.Println("recv partition is", part, ok)
+			//fmt.Println("recv partition is", part, ok)
 			if !ok {
 				return
 			}
@@ -165,6 +172,7 @@ func (this *KafkaClusterTools) GoRunAll(start func() (func (*sarama.ConsumerMess
 						end()
 					}
 
+					pc.Close()
 					wg.Done()
 					<-startCount
 				}()
@@ -214,7 +222,7 @@ func (this *KafkaClusterTools) GoRunNUmber(total int, start func() (func (*saram
 
 	// consume errors
 	go func() {
-		fmt.Println("biubiu~")
+		//fmt.Println("biubiu~")
 		for err := range this.kafkaConsumer.Errors() {
 			//fmt.Printf("%s:Error: %s\n", this.Group, err.Error())
 			content := fmt.Sprintf("%s:Error: %s\n", this.Group, err.Error())
@@ -224,7 +232,7 @@ func (this *KafkaClusterTools) GoRunNUmber(total int, start func() (func (*saram
 
 	// consume notifications
 	go func() {
-		fmt.Println("lalala~")
+		//fmt.Println("lalala~")
 		for ntf := range this.kafkaConsumer.Notifications() {
 			//fmt.Printf("%s:Rebalanced: %+v \n", this.Group, ntf)
 			content := fmt.Sprintf("%s:Rebalanced: %+v \n", this.Group, ntf)
@@ -252,7 +260,7 @@ func (this *KafkaClusterTools) GoRunNUmber(total int, start func() (func (*saram
 		case <-startCount:
 
 			go func() {
-				fmt.Println("Start go coroutine from Messages()")
+				//fmt.Println("Start go coroutine from Messages()")
 				wg.Add(1)
 
 				defer func() {
@@ -272,6 +280,7 @@ func (this *KafkaClusterTools) GoRunNUmber(total int, start func() (func (*saram
 					select {
 					case msg := <- this.kafkaConsumer.Messages():
 						//fmt.Print( temp, os.Getpid() )
+						//fmt.Println("Recv msg", )
 						dispose(msg)
 						this.kafkaConsumer.MarkOffset(msg, "")
 						this.kafkaConsumer.CommitOffsets()

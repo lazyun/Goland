@@ -88,7 +88,7 @@ func main() {
 
 
 	// 按时间区分文件
-	err, timeFile := logT.TimeFileAppend("/Users/phoenix/Documents/myGithub/Goland/logTools/logs/", "li.", ".log", 'H', 600, 900)
+	timeFile, err := logT.TimeFileAppend("/Users/phoenix/Documents/myGithub/Goland/logTools/logs/", "li.", ".log", 'H', 600, 900)
 	if nil != err {
 		fmt.Println("Create time append file fail ", err)
 		os.Exit(1)

@@ -88,8 +88,8 @@ func (this *SqlTools) SetLogHandle(funcName func (msg interface{})) {
 
 func (this *SqlTools) SetErrLog(msg string, value ...interface{}) {
 	if nil == this.logHandle {
-		fmt.Println("log handle is nil")
-		fmt.Printf(msg, value ...)
+		//fmt.Println("log handle is nil")
+		//fmt.Printf(msg, value ...)
 		return
 	}
 

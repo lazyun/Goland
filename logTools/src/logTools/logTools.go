@@ -25,24 +25,30 @@ var WriteFileBuffer = 4096
 
 
 func SprintfLog(template string, values ...interface{}) string {
-	_, file, line, ok := runtime.Caller(1)
+	_, file, line, ok := runtime.Caller(2)
 
+	now := time.Now().Format("2006-01-02 15:04:05")
 	var logInfo string
 	if ok {
 		ret_array := strings.Split(file, "/")
 		ret_array_len := len(ret_array)
-		logInfo = fmt.Sprintf("File %s line %d %s\n", ret_array[ret_array_len -1], line, template)
+		logInfo = fmt.Sprintf("%s File %s line %d %s\n", now, ret_array[ret_array_len -1], line, template)
 		logInfo = fmt.Sprintf(logInfo, values...)
 	} else {
-		logInfo = fmt.Sprintf("File None line None get caller fail %s\n", template)
+		logInfo = fmt.Sprintf("%s File None line None get caller fail %s\n", now, template)
 		logInfo = fmt.Sprintf(logInfo, values...)
-
 	}
 
 	return logInfo
 	//fmt.Printf("Result is %d, %s, %d, %d", emm, ret_array[], line, ok)
 	//
 	//return ""
+}
+
+func GetGlobalStack() string {
+	buf := make([]byte, 1<<16)
+	runtime.Stack(buf, false)
+	return string(buf)
 }
 
 
@@ -339,10 +345,11 @@ func GoroutineMapReadT() {
 
 // 2006-01-02 15:04:05
 // 划分细度：H (小时)、D (天)
-func TimeFileAppend(basePath, filePrefix, fileSuffix string, fileSplit byte, flushRate, closeDelay int) (error, func (string, bool) error) {
+// flushRate 秒
+func TimeFileAppend(basePath, filePrefix, fileSuffix string, fileSplit byte, flushRate, closeDelay int) (func (string, bool) error, error) {
 	// 创建目录
 	if ok, err := FileExist(basePath, "", true); !ok {
-		return err, nil
+		return nil, err
 	}
 
 	fileHandleMap := make( map[string]*os.File )
@@ -481,7 +488,7 @@ func TimeFileAppend(basePath, filePrefix, fileSuffix string, fileSplit byte, flu
 	//time.Sleep(time.Millisecond * 50)
 	<-waitGoChan
 
-	return nil, func(content string, close bool) error {
+	return func(content string, close bool) error {
 		if close {
 			//fmt.Println("Defer enter there")
 			for _, value := range fileIoHandleMap {
@@ -501,5 +508,5 @@ func TimeFileAppend(basePath, filePrefix, fileSuffix string, fileSplit byte, flu
 
 		_, err := ioHandle.WriteString( content  )
 		return err
-	}
+	}, nil
 }
