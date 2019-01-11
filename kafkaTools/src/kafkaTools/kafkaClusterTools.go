@@ -11,6 +11,8 @@ import (
 	"os"
 	"os/signal"
 	"sync"
+	"time"
+	"syscall"
 )
 
 type KafkaConfig struct {
@@ -20,6 +22,7 @@ type KafkaConfig struct {
 	TopicSend 	[]string 	`json:"topic_send"`
 
 	StartNumb	int			`json:"start_number"`
+	RunCount	int64		`json:"run_count"`
 }
 
 type KafkaClusterTools struct {
@@ -33,6 +36,7 @@ type KafkaClusterTools struct {
 	kafkaConsumer	*cluster.Consumer
 
 	DisposeFunc		func()
+	RunCount		int64
 }
 
 
@@ -53,6 +57,7 @@ func (this *KafkaClusterTools) SetConfigNormal(cfg KafkaConfig, IsUsePartitions 
 	this.Broker = cfg.Hosts
 	this.Topic = cfg.Topic
 	this.Group = cfg.Consumer
+	this.RunCount = cfg.RunCount
 
 	this.Connect()
 }
@@ -225,7 +230,8 @@ func (this *KafkaClusterTools) GoRunNUmber(total int, start func() (func (*saram
 		//fmt.Println("biubiu~")
 		for err := range this.kafkaConsumer.Errors() {
 			//fmt.Printf("%s:Error: %s\n", this.Group, err.Error())
-			content := fmt.Sprintf("%s:Error: %s\n", this.Group, err.Error())
+			now := time.Now().Format("2006-01-02 15:04:05")
+			content := fmt.Sprintf("%s\t%s:Error: %s\n", now, this.Group, err.Error())
 			this.SetLog(content)
 		}
 	}()
@@ -235,7 +241,8 @@ func (this *KafkaClusterTools) GoRunNUmber(total int, start func() (func (*saram
 		//fmt.Println("lalala~")
 		for ntf := range this.kafkaConsumer.Notifications() {
 			//fmt.Printf("%s:Rebalanced: %+v \n", this.Group, ntf)
-			content := fmt.Sprintf("%s:Rebalanced: %+v \n", this.Group, ntf)
+			now := time.Now().Format("2006-01-02 15:04:05")
+			content := fmt.Sprintf("%s\t%s:Rebalanced: %+v \n", now, this.Group, ntf)
 			this.SetLog(content)
 		}
 	}()
@@ -276,6 +283,7 @@ func (this *KafkaClusterTools) GoRunNUmber(total int, start func() (func (*saram
 
 				//temp := id
 
+				var recvCount int64 = 0
 				for {
 					select {
 					case msg := <- this.kafkaConsumer.Messages():
@@ -284,6 +292,14 @@ func (this *KafkaClusterTools) GoRunNUmber(total int, start func() (func (*saram
 						dispose(msg)
 						this.kafkaConsumer.MarkOffset(msg, "")
 						this.kafkaConsumer.CommitOffsets()
+
+						recvCount++
+						if recvCount == this.RunCount {
+							//syscall.
+							signals<- syscall.SIGUSR1
+							<-exitAllCorou
+							return
+						}
 					case ret, ok := <-exitAllCorou:
 						fmt.Println("Go coroutine signal recv is", ret, ok)
 						return
