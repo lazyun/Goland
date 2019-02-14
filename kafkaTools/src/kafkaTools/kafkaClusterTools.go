@@ -325,3 +325,114 @@ func (this *KafkaClusterTools) GoRunNUmber(total int, start func() (func (*saram
 }
 
 
+func (this *KafkaClusterTools) GoRunNUmberInherit(total int) {
+
+	// consume errors
+	go func() {
+		//fmt.Println("biubiu~")
+		for err := range this.kafkaConsumer.Errors() {
+			//fmt.Printf("%s:Error: %s\n", this.Group, err.Error())
+			now := time.Now().Format("2006-01-02 15:04:05")
+			content := fmt.Sprintf("%s\t%s:Error: %s\n", now, this.Group, err.Error())
+			this.SetLog(content)
+		}
+	}()
+
+	// consume notifications
+	go func() {
+		//fmt.Println("lalala~")
+		for ntf := range this.kafkaConsumer.Notifications() {
+			//fmt.Printf("%s:Rebalanced: %+v \n", this.Group, ntf)
+			now := time.Now().Format("2006-01-02 15:04:05")
+			content := fmt.Sprintf("%s\t%s:Rebalanced: %+v \n", now, this.Group, ntf)
+			this.SetLog(content)
+		}
+	}()
+
+	wg := sync.WaitGroup{}
+	//wgIsStart := sync.WaitGroup{}
+
+	signals := make(chan os.Signal, 10)
+	signal.Notify(signals, os.Interrupt)
+
+	startCount := make(chan int, 200)
+	exitAllCorou := make(chan int, 200)
+
+	for i := 0; i < total; i++ {
+		startCount<- 1
+	}
+
+	//id := 0
+
+	for {
+		select {
+		case <-startCount:
+
+			go func() {
+				//fmt.Println("Start go coroutine from Messages()")
+				wg.Add(1)
+
+				defer func() {
+					this.endDispose()
+					wg.Done()
+					startCount<- 1
+				}()
+
+				//temp := id
+
+				var recvCount int64 = 0
+				for {
+					select {
+					case msg := <- this.kafkaConsumer.Messages():
+						//fmt.Print( temp, os.Getpid() )
+						//fmt.Println("Recv msg", )
+						this.disposeMsg(msg)
+						this.kafkaConsumer.MarkOffset(msg, "")
+						this.kafkaConsumer.CommitOffsets()
+
+						recvCount++
+						if recvCount == this.RunCount {
+							//syscall.
+							signals<- syscall.SIGUSR1
+							<-exitAllCorou
+							return
+						}
+					case ret, ok := <-exitAllCorou:
+						fmt.Println("Go coroutine signal recv is", ret, ok)
+						return
+					}
+				}
+
+			}()
+
+			//time.Sleep(time.Second * 10)
+			//id++
+		case ret, ok := <-signals:
+			fmt.Println("signal recv is", ret, ok)
+
+			for i := 0; i < total; i++ {
+				exitAllCorou<- 1
+			}
+
+
+			wg.Wait()
+			return
+		}
+	}
+}
+
+
+type InheritFunc interface {
+	disposeMsg(*sarama.ConsumerMessage)
+	endDispose()
+}
+
+
+func (this *KafkaClusterTools) disposeMsg(*sarama.ConsumerMessage) {
+
+}
+
+
+func (this *KafkaClusterTools) endDispose() {
+
+}
