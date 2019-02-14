@@ -12,7 +12,16 @@ func main() {
 
 	tools := kafkaTools.KafkaClusterTools{}
 
-	tools.SetConfigNormal([]string{"192.168.2.78:9092", "192.168.2.78:9093", "192.168.2.78:9094"}, []string{"my-test-1"}, "my-test-1-group-2", false)
+	kafkaConfig := kafkaTools.KafkaConfig{
+		[]string{"192.168.2.78:9092", "192.168.2.78:9093", "192.168.2.78:9094"},
+		[]string{"my-test-1"},
+		"my-test-1-group-2",
+		[]string{"my-test-2"},
+		2,
+		-1,
+	}
+
+	tools.SetConfigNormal(kafkaConfig, false)
 
 	tools.GoRunNUmber(2, businessInit, nil)
 	//wg := sync.WaitGroup{}
@@ -23,7 +32,8 @@ func main() {
 	//
 	//wg.Wait()
 
-
+	// inherit test
+	//Run()
 }
 
 
