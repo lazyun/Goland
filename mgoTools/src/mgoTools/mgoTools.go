@@ -13,6 +13,14 @@ import (
 // 不是线程安全的
 // 操作条件最好使用 bson.M{}
 
+
+type MgoCfg struct {
+	MongoURL string `json:"mongoUrl"`
+	Password string `json:"password"`
+	WorkDB   string `json:"workDB"`
+}
+
+
 type MgoTools struct {
 	MgoUrl				string
 	MgoPass				string
@@ -79,6 +87,29 @@ func (this *MgoTools) SetLogHandle(funcName interface{}) bool {
 
 	this.mongoLogHandle = f
 	return true
+}
+
+
+func (this *MgoTools) SetLogHandleNew(funcName func (interface{})) {
+
+	f := func(args ...interface{}) {
+		content := ""
+		if len(args) > 1 {
+			content = fmt.Sprintf(args[0].(string), args[1:]...)
+		}
+
+		if len(args) == 1 {
+			switch args[0].(type) {
+			case error:
+				content = args[0].(error).Error()
+			default:
+				content = fmt.Sprintf("%s", args)
+			}
+		}
+		funcName(content)
+	}
+
+	this.mongoLogHandle = f
 }
 
 
@@ -196,11 +227,16 @@ func (this *MgoTools) FindOne(col string, query interface{}, ret interface{}, pr
 
 
 // 查询 Mongo 数据
-// 返回 *Query 其他工作需要自己做
-func (this *MgoTools) Find(col string, query interface{}) (*mgo.Iter) {
+// 返回 *Query 其他工作需要自己做 结束使用时需要 Done
+func (this *MgoTools) Find(col string, query interface{}, projections ...interface{}) (*mgo.Iter) {
 	mgoCol := this.SelectCol(col)
-	findRet := mgoCol.Find(query).Iter()
-	return findRet
+	findRet := mgoCol.Find(query)
+
+	if nil != projections {
+		findRet = findRet.Select(projections[0])
+	}
+
+	return findRet.Iter()
 }
 
 

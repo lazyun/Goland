@@ -1,4 +1,4 @@
-package goTools
+package timeTools
 
 import (
 	"os"

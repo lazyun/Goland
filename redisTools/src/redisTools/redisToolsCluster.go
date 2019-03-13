@@ -17,6 +17,12 @@ const (
 	RedisRetFormat = "Value nil %t、Execute ret %t、Error exist %t、Key nil %t、effRet %d, %f、Error info %s"
 )
 
+
+type RedisCfg struct {
+	RedisCluster []string `json:"redisCluster"`
+}
+
+
 type RedisRet struct {
 	RedisNil		bool
 	RedisOK 		bool
@@ -24,7 +30,7 @@ type RedisRet struct {
 	RedisExist		bool
 
 	RedisRetInt		int64
-	RedisRetFloat float64
+	RedisRetFloat 	float64
 	ErrInfo			error
 }
 
@@ -40,19 +46,22 @@ type RedisTools struct {
 
 
 
-func (this *RedisTools) SetConfig(redisAddr []string) {
+func (this *RedisTools) SetConfig(redisAddr []string) error {
 	this.ClusterAddr = redisAddr
-	this.ClusterConnect()
+	this.RedisLogHandle = func(args ...interface{}) {
+		
+	}
+	return this.ClusterConnect()
 }
 
 
-func (this *RedisTools) ClusterConnect() {
+func (this *RedisTools) ClusterConnect() error {
 	this.ClusterCfg = redis.ClusterOptions{
 		Addrs: this.ClusterAddr,
 	}
 
 	this.clusterClient = redis.NewClusterClient(&this.ClusterCfg)
-	this.clusterClient.Ping()
+	return this.clusterClient.Ping().Err()
 }
 
 func (this *RedisRet) RedisRetSpint() (s string) {
@@ -82,6 +91,31 @@ func (this *RedisTools) SetLogHandle(funcName interface{}) bool {
 	this.RedisLogHandle = f
 	return true
 }
+
+
+func (this *RedisTools) SetLogHandleNew(funcName func (interface{})) {
+
+	f := func(args ...interface{}) {
+		content := ""
+		if len(args) > 1 {
+			content = fmt.Sprintf(args[0].(string), args[1:]...)
+		}
+
+		if len(args) == 1 {
+			switch args[0].(type) {
+			case error:
+				content = args[0].(error).Error()
+			default:
+				content = fmt.Sprintf("%s", args)
+			}
+		}
+		
+		funcName(content)
+	}
+
+	this.RedisLogHandle = f
+}
+
 
 
 // 记录日志
@@ -308,7 +342,7 @@ func (this *RedisTools) Get(key string, value interface{}) (redisRet RedisRet) {
 // 设置 key - value 并且设置 key 过期时间，0 代表不过期
 // 返回结果为 true：RedisRet.RedisOK：设置成功、否则异常 RedisRet.RedisErr：存在异常
 func (this *RedisTools) Set(key string, value interface{}, expire time.Duration) (redisRet RedisRet) {
-	ret := this.clusterClient.Set(key, value, time.Second *expire)
+	ret := this.clusterClient.Set(key, value, time.Second * expire)
 
 	redisRet = RedisRet{
 		false,

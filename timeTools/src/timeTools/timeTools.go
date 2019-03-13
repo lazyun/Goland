@@ -1,4 +1,4 @@
-package goTools
+package timeTools
 
 import (
 	"time"
@@ -63,7 +63,7 @@ func SToUnix(timeStamp, formatStr string) (int64, error) {
 	var err			error
 	var thisTimer	time.Time
 
-	if thisTimer, err = time.Parse(formatStr, timeStamp); err == nil{
+	if thisTimer, err = time.ParseInLocation(formatStr, timeStamp, time.Local); err == nil{
 		return thisTimer.Unix(), nil
 	}
 
