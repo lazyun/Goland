@@ -5,8 +5,8 @@ import (
 	"fmt"
 )
 
-func main()  {
-
+//func main()  {
+func mainsd()  {
 	tools := new(redisTools.RedisTools)
 	tools.SetConfig([]string{"127.0.0.1:6901", "127.0.0.1:6902"})
 	tools.SetLogHandle(printErrInfo)

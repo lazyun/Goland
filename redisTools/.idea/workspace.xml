@@ -1,21 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="26932667-6817-453d-9a59-98fd8bcc992f" name="Default" comment="" />
+    <list default="true" id="26932667-6817-453d-9a59-98fd8bcc992f" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/go.imports.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/mianNew.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/redisToolsNew/redisClusterTools.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafkaTools/src/kafkaTools/kafkaClusterTools.go" beforeDir="false" afterPath="$PROJECT_DIR$/../kafkaTools/src/kafkaTools/kafkaClusterTools.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mgoTools/src/mgoTools/mgoTools.go" beforeDir="false" afterPath="$PROJECT_DIR$/../mgoTools/src/mgoTools/mgoTools.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/main.go" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
-    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="redisToolsCluster.go" pinned="false" current-in-tab="false">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/redisTools/redisToolsCluster.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="30" column="15" lean-forward="false" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="15" />
+            <state relative-caret-position="6090">
+              <caret line="406" column="11" lean-forward="true" selection-start-line="406" selection-start-column="11" selection-end-line="406" selection-end-column="11" />
               <folding>
                 <element signature="e#20#85#0" expanded="true" />
               </folding>
@@ -23,43 +32,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="redisToolsLocal.go" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/redisTools/redisToolsLocal.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" column="20" lean-forward="false" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="20" />
-              <folding>
-                <element signature="e#20#78#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="options.go" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/go/src/github.com/go-redis/redis/options.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="21" column="8" lean-forward="false" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="8" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="redis.go" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/go/src/github.com/go-redis/redis/redis.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="208">
-              <caret line="337" column="18" lean-forward="false" selection-start-line="337" selection-start-column="15" selection-end-line="337" selection-end-column="18" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="main.go" pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/main.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1762">
-              <caret line="124" column="0" lean-forward="true" selection-start-line="124" selection-start-column="0" selection-end-line="124" selection-end-column="0" />
+            <state relative-caret-position="-624">
+              <caret line="8" column="11" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
               <folding>
                 <element signature="e#14#59#0" expanded="true" />
               </folding>
@@ -67,52 +44,51 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="commands.go" pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/docs/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor />
+              <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/redisToolsNew/redisClusterTools.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-3743">
+              <caret line="77" column="3" selection-start-line="77" selection-end-line="77" selection-end-column="3" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/mianNew.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="150">
+              <caret line="10" column="24" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
+              <folding>
+                <element signature="e#14#69#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$USER_HOME$/go/src/github.com/go-redis/redis/commands.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="867" column="18" lean-forward="false" selection-start-line="867" selection-start-column="18" selection-end-line="867" selection-end-column="18" />
-              <folding />
+            <state relative-caret-position="-15382">
+              <caret line="1088" column="28" selection-start-line="1088" selection-start-column="25" selection-end-line="1088" selection-end-column="28" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="session.go" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/go/src/gopkg.in/mgo.v2/session.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="478">
-              <caret line="2499" column="85" lean-forward="true" selection-start-line="2499" selection-start-column="85" selection-end-line="2499" selection-end-column="85" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="command.go" pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$USER_HOME$/go/src/github.com/go-redis/redis/command.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="615" column="31" lean-forward="false" selection-start-line="615" selection-start-column="31" selection-end-line="615" selection-end-column="31" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="cluster.go" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/go/src/github.com/go-redis/redis/cluster.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="456" column="5" lean-forward="false" selection-start-line="456" selection-start-column="5" selection-end-line="456" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/docs/README.md">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="22" lean-forward="false" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
-              <folding />
+            <state relative-caret-position="118">
+              <caret line="273" column="19" selection-start-line="273" selection-start-column="19" selection-end-line="273" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -134,6 +110,8 @@
       <find>RedisTools</find>
       <find>clusterClient</find>
       <find>) M</find>
+      <find>setProcessor</find>
+      <find>Incr</find>
     </findStrings>
     <replaceStrings>
       <replace>RedisToolsLocal</replace>
@@ -141,42 +119,32 @@
     </replaceStrings>
   </component>
   <component name="GOROOT" path="/usr/local/go" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/redisTools/redisTools.go" />
-        <option value="$PROJECT_DIR$/src/main/main.go" />
         <option value="$PROJECT_DIR$/src/redisTools/redisToolsLocal.go" />
         <option value="$PROJECT_DIR$/docs/README.md" />
+        <option value="$PROJECT_DIR$/src/redisToolsNew/t.go" />
+        <option value="$PROJECT_DIR$/src/main/main.go" />
+        <option value="$PROJECT_DIR$/src/redisToolsNew/redisClusterTools.go" />
+        <option value="$PROJECT_DIR$/src/main/mianNew.go" />
       </list>
     </option>
-  </component>
-  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsGulpfileManager">
-    <detection-done>true</detection-done>
-    <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
     <option name="width" value="1680" />
     <option name="height" value="1046" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1">
-      <flattenPackages />
-      <showMembers />
-      <showModules />
-      <showLibraryContents />
-      <hideEmptyPackages />
-      <abbreviatePackageNames />
-      <autoscrollToSource />
-      <autoscrollFromSource />
-      <sortByType />
-      <manualOrder />
+    <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -198,29 +166,23 @@
               <item name="redisTools" type="b2602c69:ProjectViewProjectNode" />
               <item name="redisTools" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="redisTools" type="b2602c69:ProjectViewProjectNode" />
+              <item name="redisTools" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="redisTools" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="redisTools" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-            </path>
-            <path>
-              <item name="redisTools" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="GOPATH &lt;redisTools&gt;" type="20ee2d1f:SyntheticLibraryElementNode" />
-            </path>
-            <path>
-              <item name="redisTools" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="GOPATH &lt;redisTools&gt;" type="20ee2d1f:SyntheticLibraryElementNode" />
+              <item name="redisTools" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="redisToolsNew" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="redisTools" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="GOPATH &lt;redisTools&gt;" type="20ee2d1f:SyntheticLibraryElementNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="github.com" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -230,9 +192,12 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="go.sdk.automatically.set" value="true" />
     <property name="DefaultGoTemplateProperty" value="Go File" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="go.gopath.indexing.explicitly.defined" value="true" />
+    <property name="go.sdk.automatically.set" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="go.autoimport" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -246,7 +211,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Go Build.go build mianNew.go">
     <configuration name="go build main.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true">
       <module name="redisTools" />
       <working_directory value="$PROJECT_DIR$/" />
@@ -254,15 +219,33 @@
       <kind value="FILE" />
       <filePath value="$PROJECT_DIR$/src/main/main.go" />
       <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build mianNew.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="redisTools" />
+      <working_directory value="$PROJECT_DIR$/" />
+      <go_parameters value="-i" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/src/main/mianNew.go" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build t.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="redisTools" />
+      <working_directory value="$PROJECT_DIR$/" />
+      <go_parameters value="-i" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/src/redisToolsNew/t.go" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
     </configuration>
     <recent_temporary>
-      <list size="1">
-        <item index="0" class="java.lang.String" itemvalue="Go Build.go build main.go" />
+      <list>
+        <item itemvalue="Go Build.go build mianNew.go" />
+        <item itemvalue="Go Build.go build t.go" />
+        <item itemvalue="Go Build.go build main.go" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="ShelveChangesManager" show_recycled="false">
-    <option name="remove_strategy" value="false" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -274,42 +257,37 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1680" height="1046" extended-state="6" />
+    <frame x="0" y="0" width="1680" height="1050" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24969475" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3299075" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3299075" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3299075" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1929182" />
+      <window_info id="Structure" order="1" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32959184" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.3299075" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.25918368" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Docker" order="10" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" order="11" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager />
-    <watches-manager />
-  </component>
   <component name="editorHistoryManager">
     <entry file="file://$USER_HOME$/go/src/github.com/go-redis/redis/tx.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-988">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -317,7 +295,7 @@
     <entry file="file:///usr/local/go/src/builtin/builtin.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="208">
-          <caret line="18" column="4" lean-forward="false" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="4" />
+          <caret line="18" column="4" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="4" />
           <folding />
         </state>
       </provider>
@@ -325,7 +303,7 @@
     <entry file="file://$USER_HOME$/go/src/github.com/go-redis/redis/example_test.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="555">
-          <caret line="67" column="9" lean-forward="false" selection-start-line="67" selection-start-column="9" selection-end-line="67" selection-end-column="9" />
+          <caret line="67" column="9" selection-start-line="67" selection-start-column="9" selection-end-line="67" selection-end-column="9" />
           <folding>
             <element signature="n#!!block;n#ExampleParseURL#0" expanded="false" />
             <element signature="n#!!block;n#ExampleNewFailoverClient#0" expanded="false" />
@@ -333,70 +311,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/go/src/gopkg.in/mgo.v2/session.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="478">
-          <caret line="2499" column="85" lean-forward="true" selection-start-line="2499" selection-start-column="85" selection-end-line="2499" selection-end-column="85" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/go/src/github.com/go-redis/redis/cluster.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="456" column="5" lean-forward="false" selection-start-line="456" selection-start-column="5" selection-end-line="456" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/go/src/github.com/go-redis/redis/commands.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="867" column="18" lean-forward="false" selection-start-line="867" selection-start-column="18" selection-end-line="867" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/go/src/github.com/go-redis/redis/command.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="615" column="31" lean-forward="false" selection-start-line="615" selection-start-column="31" selection-end-line="615" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/main.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1762">
-          <caret line="124" column="0" lean-forward="true" selection-start-line="124" selection-start-column="0" selection-end-line="124" selection-end-column="0" />
-          <folding>
-            <element signature="e#14#59#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/go/src/github.com/go-redis/redis/redis.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="337" column="18" lean-forward="false" selection-start-line="337" selection-start-column="15" selection-end-line="337" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/redisTools/redisToolsCluster.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="30" column="15" lean-forward="false" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="15" />
-          <folding>
-            <element signature="e#20#85#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/redisTools/redisToolsLocal.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="20" lean-forward="false" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="20" />
+        <state relative-caret-position="75">
+          <caret line="9" column="20" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="20" />
           <folding>
             <element signature="e#20#78#0" expanded="true" />
           </folding>
@@ -406,16 +324,96 @@
     <entry file="file://$USER_HOME$/go/src/github.com/go-redis/redis/options.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
-          <caret line="21" column="8" lean-forward="false" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="8" />
-          <folding />
+          <caret line="21" column="8" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="8" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/docs/README.md">
+    <entry file="file://$USER_HOME$/go/src/github.com/go-redis/redis/redis.go">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4920">
+          <caret line="337" column="18" selection-start-line="337" selection-start-column="15" selection-end-line="337" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/go/src/gopkg.in/mgo.v2/session.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="37245">
+          <caret line="2499" column="85" selection-start-line="2499" selection-start-column="85" selection-end-line="2499" selection-end-column="85" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/redisToolsNew/t.go" />
+    <entry file="file://$PROJECT_DIR$/docs/README.md">
+      <provider editor-type-id="text-editor">
         <state relative-caret-position="165">
-          <caret line="11" column="22" lean-forward="false" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
-          <folding />
+          <caret line="11" column="22" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/go/src/github.com/go-redis/redis/cluster.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="49" column="11" selection-start-line="49" selection-start-column="11" selection-end-line="49" selection-end-column="11" />
+          <folding>
+            <element signature="e#15#255#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/main.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-624">
+          <caret line="8" column="11" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
+          <folding>
+            <element signature="e#14#59#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/go/src/github.com/go-redis/redis/command.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="118">
+          <caret line="273" column="19" selection-start-line="273" selection-start-column="19" selection-end-line="273" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/go/src/github.com/go-redis/redis/commands.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-15382">
+          <caret line="1088" column="28" selection-start-line="1088" selection-start-column="25" selection-end-line="1088" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/redisTools/redisToolsCluster.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6090">
+          <caret line="406" column="11" lean-forward="true" selection-start-line="406" selection-start-column="11" selection-end-line="406" selection-end-column="11" />
+          <folding>
+            <element signature="e#20#85#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/redisToolsNew/redisClusterTools.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3743">
+          <caret line="77" column="3" selection-start-line="77" selection-end-line="77" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/mianNew.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="24" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
+          <folding>
+            <element signature="e#14#69#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
