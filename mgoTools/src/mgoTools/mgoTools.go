@@ -217,7 +217,7 @@ func (this *MgoTools) FindOne(col string, query interface{}, ret interface{}, pr
 	}
 
 	this.MgoErr = findRet.One(ret)
-	if nil == this.MgoErr {
+	if nil == this.MgoErr || mgo.ErrNotFound == this.MgoErr {
 		return true
 	}
 
@@ -331,7 +331,7 @@ func (this *MgoTools) UpdateAll(col string, selector, update interface{}) bool {
 	if nil == this.MgoErr {
 		return true
 	}
-
+	
 	this.mongoLogHandle(this.MgoErr)
 	return false
 }

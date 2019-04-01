@@ -155,7 +155,10 @@ func (this *KafkaClusterTools) GoRunAll(start func() (func (*sarama.ConsumerMess
 	wg := sync.WaitGroup{}
 
 	signals := make(chan os.Signal, 10)
+	// ctrl c
 	signal.Notify(signals, os.Interrupt)
+	// kill
+	signal.Notify(signals, syscall.SIGTERM)
 
 	startCount := make(chan int, 200)
 	exitAllCorou := make(chan int, 200)
@@ -251,7 +254,10 @@ func (this *KafkaClusterTools) GoRunNUmber(total int, start func() (func (*saram
 	//wgIsStart := sync.WaitGroup{}
 
 	signals := make(chan os.Signal, 10)
+	// ctrl c
 	signal.Notify(signals, os.Interrupt)
+	// kill
+	signal.Notify(signals, syscall.SIGTERM)
 
 	startCount := make(chan int, 200)
 	exitAllCorou := make(chan int, 200)

@@ -66,5 +66,12 @@ func main() {
 	ret = rc.LPop("lpopop", &value)
 	fmt.Printf("LPop %+v %s\n", ret, value)
 
+	fmt.Scanln(&value)
+	ret = rc.LPush("laaaa", 123)
+	fmt.Printf("LPush %+v\n", ret)
+
+	fmt.Scanln(&value)
+	ret = rc.LPush("laaaa", 123)
+	fmt.Printf("LPush %+v\n", ret)
 
 }

@@ -132,7 +132,7 @@ func (this *RedisTools) SetLog(msg interface{}) {
 // 返回结果为 true：redisRet.RedisErr：存在异常、redisRet.RedisOK 存在 or 不存在
 func (this *RedisTools) Exist(key string) (redisRet RedisRet) {
 	ret := this.clusterClient.Exists(key)
-
+	
 	redisRet = RedisRet{
 		false,
 		false,
