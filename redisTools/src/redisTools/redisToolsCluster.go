@@ -638,8 +638,8 @@ func (this *RedisTools) RPop(key string, value interface{}) (redisRet RedisRet) 
 // 向集合 Set 中添加一个 value
 // 返回结果：redisRet.RedisErr 是否存在异常、
 // redisRet.RedisOK 是否操作成功、redisRet.RedisNil 是否已经存在 true 不存在 false 存在
-func (this *RedisTools) SAdd(key string, value interface{}) (redisRet RedisRet) {
-	ret := this.clusterClient.SAdd(key, value)
+func (this *RedisTools) SAdd(key string, value ...interface{}) (redisRet RedisRet) {
+	ret := this.clusterClient.SAdd(key, value...)
 
 	redisRet = RedisRet{
 		false,
