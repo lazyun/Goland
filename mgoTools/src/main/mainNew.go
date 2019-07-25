@@ -1,10 +1,11 @@
 package main
 
 import (
-	"../mgoTools"
 	"fmt"
-	"gopkg.in/mgo.v2/bson"
 	"time"
+
+	"../mgoTools"
+	"gopkg.in/mgo.v2/bson"
 )
 
 func main() {
@@ -16,7 +17,7 @@ func main() {
 	mgoCfg := mgoTools.MgoCfg{
 		MongoURL: "mongodb://lizy:%s@127.0.0.1:27017/admin",
 		Password: "lizy123",
-		WorkDB: "tt",
+		WorkDB:   "tt",
 	}
 
 	mgoT := mgoTools.MgoTools{}
@@ -72,30 +73,28 @@ func main() {
 	}
 
 	objId := bson.NewObjectId()
-	fmt.Println( objId )
+	fmt.Println(objId)
 
 	//fmt.Println( mgoT.Insert(col, bson.M{ "_id": objId, "sd_cid": 12, "value": "zxc#hehehe" }) )
 
-	fmt.Println( mgoT.UpdateOne(col, bson.M{ "sd_cid": 12, "value": "zxc#hehehe" }, bson.M{"$addToSet": bson.M{ "asdad": objId } }) )
+	fmt.Println(mgoT.UpdateOne(col, bson.M{"sd_cid": 12, "value": "zxc#hehehe"}, bson.M{"$addToSet": bson.M{"asdad": objId}}))
 	//fmt.Println( ttttMapValue() )
 
 	var rett = map[string][]bson.ObjectId{}
 
-	fmt.Println( mgoT.FindOne(col, bson.M{ "sd_cid": 12, "value": "zxc#hehehe" }, rett, bson.M{"asdad": 1, "_id": 0}), rett )
+	fmt.Println(mgoT.FindOne(col, bson.M{"sd_cid": 12, "value": "zxc#hehehe"}, rett, bson.M{"asdad": 1, "_id": 0}), rett)
 }
-
 
 func printLog(msg interface{}) {
 	fmt.Println(msg)
 }
 
-
 func ttttMapValue() map[string][]string {
 	var gValue = "123"
 	var tMap = map[string][]string{
-		"A": []string{"1", },
-		"B": []string{"2", },
-		"C": []string{"3", },
+		"A": []string{"1"},
+		"B": []string{"2"},
+		"C": []string{"3"},
 	}
 
 	for key, value := range tMap {

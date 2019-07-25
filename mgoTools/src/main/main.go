@@ -2,11 +2,11 @@ package main
 
 import (
 	"fmt"
-	MgoT "../mgoTools"
 	"os"
+
+	MgoT "../mgoTools"
 	"gopkg.in/mgo.v2/bson"
 )
-
 
 func main() {
 	fmt.Println("some")
@@ -100,12 +100,9 @@ func main() {
 				{"keySub3", "valueSub3"},
 				{"keySub4", "valueSub4"},
 				{"keySub5", "valueSub5"},
-
 			},
 		},
 	}
-
-
 
 	ok = mgoT.Insert(col, insertValues2)
 	if ok {
@@ -123,11 +120,11 @@ func main() {
 
 	query_projections := bson.M{
 		"start": 1,
-		"_id": 0,
+		"_id":   0,
 	}
 	var deviceInfoOne map[string]interface{}
 	ok = mgoT.FindOne("go_test", query, &deviceInfoOne, query_projections)
-	fmt.Println( deviceInfoOne, ok, mgoT.MgoErr )
+	fmt.Println(deviceInfoOne, ok, mgoT.MgoErr)
 
 	// update
 	//updateConditions := bson.M{
@@ -146,8 +143,6 @@ func main() {
 	//	fmt.Println("Delete one success!")
 	//}
 
-
-
 	queryConditions := bson.M{
 		"_id": bson.ObjectIdHex("5abb5f4eeea0a43270543327"),
 	}
@@ -159,10 +154,10 @@ func main() {
 	}
 
 	projections := bson.M{
-		"mac": 1,
-		"jklasn": 1,
+		"mac":         1,
+		"jklasn":      1,
 		"fields_type": 1,
-		"_id": 0,
+		"_id":         0,
 	}
 
 	ret := make(map[string]interface{})
@@ -173,9 +168,8 @@ func main() {
 	fmt.Println("Find and modify success ret is", mgoT.MgoUpdateInfo, ret)
 }
 
-
-func userHandleTest(handle interface{}) (func(string, interface{}) (bool)) {
-	afaf, ok := handle.(func(string, interface{}) (bool) )
+func userHandleTest(handle interface{}) func(string, interface{}) bool {
+	afaf, ok := handle.(func(string, interface{}) bool)
 	if ok {
 		return afaf
 	}
@@ -184,7 +178,6 @@ func userHandleTest(handle interface{}) (func(string, interface{}) (bool)) {
 	return nil
 }
 
-
 func PrintLog(err error) {
-	fmt.Println( "Reflect print err is ", err )
+	fmt.Println("Reflect print err is ", err)
 }

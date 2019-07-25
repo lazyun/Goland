@@ -1,13 +1,12 @@
 package main
 
 import (
-	SqlT "../mysqlTools"
 	"fmt"
 	"os"
-	"bufio"
-	//"github.com/derekparker/delve/pkg/dwarf/reader"
-)
 
+	//"github.com/derekparker/delve/pkg/dwarf/reader"
+	SqlT "mysqlTools"
+)
 
 func main() {
 
@@ -123,8 +122,8 @@ func main() {
 			break
 		}
 
-		queryId := string( queryRetValue[0] )
-		queryName := string( queryRetValue[1] )
+		queryId := string(queryRetValue[0])
+		queryName := string(queryRetValue[1])
 		fmt.Printf("Query result id is %s, name is %s\n", queryId, queryName)
 	}
 
@@ -132,7 +131,7 @@ func main() {
 	var execRetValue1 int64
 	execRet := sqlT.ExecCmd("insert into goTest(name, created) values(?, ?)", "la~la~la~", 1531800702)
 	if nil == execRet {
-		fmt.Printf("ExecCmd fail error is %s\n", sqlT.SqlErr.Error() )
+		fmt.Printf("ExecCmd fail error is %s\n", sqlT.SqlErr.Error())
 	} else {
 		execRetValue1, _ = execRet.LastInsertId()
 		execRetValue2, _ := execRet.RowsAffected()
@@ -141,7 +140,7 @@ func main() {
 
 	execRet1 := sqlT.ExecCmd("update goTest set name = ? where id = ?", "biu~biu~biu~", 1)
 	if nil == execRet1 {
-		fmt.Printf("ExecCmd fail error is %s\n", sqlT.SqlErr.Error() )
+		fmt.Printf("ExecCmd fail error is %s\n", sqlT.SqlErr.Error())
 	} else {
 		execRetValue3, _ := execRet.LastInsertId()
 		execRetValue4, _ := execRet.RowsAffected()
@@ -150,7 +149,7 @@ func main() {
 
 	execRet2 := sqlT.ExecCmd("delete from goTest where id = ?", execRetValue1)
 	if nil == execRet2 {
-		fmt.Printf("ExecCmd fail error is %s\n", sqlT.SqlErr.Error() )
+		fmt.Printf("ExecCmd fail error is %s\n", sqlT.SqlErr.Error())
 	} else {
 		execRetValue5, _ := execRet.LastInsertId()
 		execRetValue6, _ := execRet.RowsAffected()

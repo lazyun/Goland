@@ -2,11 +2,11 @@ package mysqlTools
 
 import (
 	"database/sql"
-	_ "github.com/go-sql-driver/mysql"
 	"fmt"
 	"strconv"
-)
 
+	_ "github.com/go-sql-driver/mysql"
+)
 
 type MysqlConfig struct {
 	Host       string `json:"host"`
@@ -19,24 +19,27 @@ type MysqlConfig struct {
 } //`json:"mysql-config"`
 
 
+var _ MysqlTools = new(SqlTools)
+
+
 type SqlTools struct {
 	// 配置信息
-	Host		string
-	User		string
-	Passwd		string
-	Db			string
-	Port		int
-	UrlStr		string
+	Host   string
+	User   string
+	Passwd string
+	Db     string
+	Port   int
+	UrlStr string
 
 	// mysql 连接池
-	Pool		*sql.DB
+	Pool *sql.DB
 
 	// err 信息
-	SqlErr		error
-	logHandle	func (interface{})
+	SqlErr    error
+	logHandle func(interface{})
 
 	// sql Stmt 模版
-	StmtMap		map[string]*sql.Stmt
+	StmtMap map[string]*sql.Stmt
 }
 
 // Set Mysql config and connect Mysql
@@ -60,7 +63,7 @@ func (this *SqlTools) SetConfig(host, user, passwd, db string, port int, charset
 
 // Connect mysql
 // Return true or false. SqlTools.SqlErr is fail to connect
-func (this *SqlTools) Connect() (bool) {
+func (this *SqlTools) Connect() bool {
 	this.Pool, this.SqlErr = sql.Open("mysql", this.UrlStr)
 	if nil != this.SqlErr {
 		return false
@@ -74,17 +77,14 @@ func (this *SqlTools) Connect() (bool) {
 	return true
 }
 
-
 // Close Mysql
-func (this *SqlTools) Close() {
-	this.Pool.Close()
+func (this *SqlTools) Close() error {
+	return this.Pool.Close()
 }
 
-
-func (this *SqlTools) SetLogHandle(funcName func (msg interface{})) {
+func (this *SqlTools) SetLogHandle(funcName func(msg interface{})) {
 	this.logHandle = funcName
 }
-
 
 func (this *SqlTools) SetErrLog(msg string, value ...interface{}) {
 	if nil == this.logHandle {
@@ -93,10 +93,9 @@ func (this *SqlTools) SetErrLog(msg string, value ...interface{}) {
 		return
 	}
 
-	ret := fmt.Sprintf(msg, value ...)
+	ret := fmt.Sprintf(msg, value...)
 	this.logHandle(ret)
 }
-
 
 func (this *SqlTools) SetMaxConn(num int) {
 	this.Pool.SetMaxOpenConns(num)
@@ -116,7 +115,6 @@ func (this *SqlTools) SetSqlStatement(key, value string) bool {
 	return true
 }
 
-
 // Use sql template to query mysql
 // Parameter key: SetSqlStatement the key, value: sql parameter
 // Return true
@@ -131,13 +129,12 @@ func (this *SqlTools) QueryOneStmt(key string, value ...interface{}) (sql.Row, b
 	if nil == value {
 		row = stmt.QueryRow()
 	} else {
-		row = stmt.QueryRow(value ...)
+		row = stmt.QueryRow(value...)
 	}
 
 	// get value use row.Scan()
 	return *row, true
 }
-
 
 func (this *SqlTools) ChangeStmt(key string, value ...interface{}) (sql.Result, bool) {
 	stmt, ok := this.StmtMap[key]
@@ -163,8 +160,7 @@ func (this *SqlTools) ChangeStmt(key string, value ...interface{}) (sql.Result, 
 	return *ret, true
 }
 
-
-func (this *SqlTools) Query(sqlCmd string, args ...interface{}) ( func(isClose bool) ([]sql.RawBytes, bool) ) {
+func (this *SqlTools) Query(sqlCmd string, args ...interface{}) func(isClose bool) ([]sql.RawBytes, bool) {
 	rows, err := this.Pool.Query(sqlCmd, args...)
 	if nil != err {
 		this.SqlErr = err
@@ -182,7 +178,7 @@ func (this *SqlTools) Query(sqlCmd string, args ...interface{}) ( func(isClose b
 
 	//fmt.Println("query field is ", columns)
 
-	return func (isClose bool) ([]sql.RawBytes, bool) {
+	return func(isClose bool) ([]sql.RawBytes, bool) {
 		if isClose {
 			rows.Close()
 		}
@@ -214,8 +210,7 @@ func (this *SqlTools) Query(sqlCmd string, args ...interface{}) ( func(isClose b
 
 }
 
-
-func (this *SqlTools) ExecCmd(sql string, values ...interface{}) (sql.Result) {
+func (this *SqlTools) ExecCmd(sql string, values ...interface{}) sql.Result {
 	// insert、update、delete
 	ok := true
 	err := this.Pool.Ping()
@@ -230,7 +225,7 @@ func (this *SqlTools) ExecCmd(sql string, values ...interface{}) (sql.Result) {
 		return nil
 	}
 
-	ret, err := this.Pool.Exec(sql, values ...)
+	ret, err := this.Pool.Exec(sql, values...)
 	if err != nil {
 		this.SqlErr = err
 		return nil
@@ -239,4 +234,3 @@ func (this *SqlTools) ExecCmd(sql string, values ...interface{}) (sql.Result) {
 	// ret.RowsAffected()、ret.LastInsertId()
 	return ret
 }
-
